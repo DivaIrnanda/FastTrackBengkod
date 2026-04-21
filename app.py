@@ -26,21 +26,13 @@ html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
 
-.main {
-    background-color: #0f0f14;
-}
+.main { background-color: #0f0f14; }
 
-[data-testid="stAppViewContainer"] {
-    background: #0f0f14;
-}
+[data-testid="stAppViewContainer"] { background: #0f0f14; }
 
-[data-testid="stSidebar"] {
-    display: none !important;
-}
+[data-testid="stSidebar"] { display: none !important; }
 
-h1, h2, h3 {
-    font-family: 'Space Mono', monospace !important;
-}
+h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
 
 .hero-title {
     font-family: 'Space Mono', monospace;
@@ -126,9 +118,7 @@ h1, h2, h3 {
     transition: border-color 0.2s;
 }
 
-.feature-card:hover {
-    border-color: #7c6aff;
-}
+.feature-card:hover { border-color: #7c6aff; }
 
 .feature-title {
     font-family: 'Space Mono', monospace;
@@ -190,9 +180,7 @@ div[data-testid="metric-container"] {
     padding: 1rem;
 }
 
-hr {
-    border-color: #2a2a3a !important;
-}
+hr { border-color: #2a2a3a !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -209,17 +197,16 @@ def load_model():
 model = load_model()
 
 # ─────────────────────────────────────────────
-# FEATURE METADATA (LENGKAP)
+# FEATURE METADATA
 # ─────────────────────────────────────────────
 FEATURE_INFO = {
     'Have you ever had suicidal thoughts ?': {
+        'name_id': 'Pikiran Bunuh Diri',
         'type': 'categorical',
-        'options': ['No', 'Yes'],
+        'options': ['Tidak', 'Ya'],
         'desc': 'Apakah pernah memiliki pikiran untuk bunuh diri',
         'icon': '💭',
         'importance': 'critical',
-        'badge': 'badge-red',
-        'badge_label': '🔴 Pengaruh Tertinggi',
         'detail': """
 Pikiran untuk mengakhiri hidup (suicidal ideation) merupakan **salah satu gejala paling kuat** 
 dalam mendeteksi depresi klinis.
@@ -230,18 +217,17 @@ Menurut penelitian, individu yang pernah mengalami pikiran bunuh diri memiliki r
 indikator kesehatan mental yang sangat penting untuk dipantau.
 
 **Cara pengisian:**  
-- **No** → Tidak pernah memiliki pikiran bunuh diri  
-- **Yes** → Pernah memiliki pikiran tersebut (kapanpun dalam hidup)
+- **Tidak** → Tidak pernah memiliki pikiran bunuh diri  
+- **Ya** → Pernah memiliki pikiran tersebut (kapanpun dalam hidup)
 """,
     },
     'Academic Pressure': {
+        'name_id': 'Tekanan Akademik',
         'type': 'slider',
         'min': 0, 'max': 5, 'default': 3,
         'desc': 'Tingkat tekanan akademik yang dirasakan (0 = tidak ada, 5 = sangat tinggi)',
         'icon': '📚',
         'importance': 'high',
-        'badge': 'badge-orange',
-        'badge_label': '🟠 Korelasi Tinggi',
         'detail': """
 Tekanan akademik mengukur **seberapa berat beban studi** yang dirasakan mahasiswa, seperti 
 tuntutan nilai, deadline tugas, ekspektasi dosen, atau kompetisi antar mahasiswa.
@@ -259,13 +245,12 @@ sekitar **12–18%**. Mahasiswa dengan tekanan akademik ≥ 4 jauh lebih rentan.
 """,
     },
     'Financial Stress': {
+        'name_id': 'Stres Finansial',
         'type': 'slider',
         'min': 1, 'max': 5, 'default': 3,
         'desc': 'Tingkat stres finansial/keuangan (1 = rendah, 5 = sangat tinggi)',
         'icon': '💰',
         'importance': 'high',
-        'badge': 'badge-orange',
-        'badge_label': '🟠 Korelasi Tinggi',
         'detail': """
 Stres finansial mencerminkan **tekanan ekonomi** yang dialami mahasiswa, meliputi kekhawatiran 
 biaya kuliah, kebutuhan hidup sehari-hari, utang, atau ketidakstabilan keuangan keluarga.
@@ -283,13 +268,12 @@ Kekhawatiran tentang uang dapat mengganggu tidur, konsentrasi, dan motivasi bela
 """,
     },
     'Age': {
+        'name_id': 'Usia',
         'type': 'number',
         'min': 18, 'max': 40, 'default': 22,
         'desc': 'Usia mahasiswa dalam tahun',
         'icon': '🎂',
         'importance': 'moderate',
-        'badge': 'badge-blue',
-        'badge_label': '🔵 Pengaruh Moderat',
         'detail': """
 Usia mahasiswa (dalam tahun) berperan dalam menentukan pola kerentanan terhadap depresi. 
 Mahasiswa berusia **18–22 tahun** sering berada dalam fase transisi kehidupan yang rentan 
@@ -304,13 +288,12 @@ Mahasiswa berusia **18–22 tahun** sering berada dalam fase transisi kehidupan 
 """,
     },
     'Work/Study Hours': {
+        'name_id': 'Jam Belajar',
         'type': 'slider',
         'min': 0, 'max': 24, 'default': 8,
         'desc': 'Jumlah jam kerja atau belajar per hari',
         'icon': '⏱️',
         'importance': 'moderate',
-        'badge': 'badge-blue',
-        'badge_label': '🔵 Pengaruh Moderat',
         'detail': """
 Mengukur **total jam per hari** yang dihabiskan untuk kegiatan belajar dan/atau bekerja. 
 Ini mencerminkan keseimbangan antara produktivitas dan waktu istirahat.
@@ -327,36 +310,33 @@ yang merupakan gejala depresi.
 """,
     },
     'Dietary Habits': {
+        'name_id': 'Pola Makan',
         'type': 'categorical',
-        'options': ['Healthy', 'Moderate', 'Unhealthy'],
+        'options': ['Sehat', 'Sedang', 'Tidak Sehat'],
         'desc': 'Kebiasaan pola makan sehari-hari',
         'icon': '🥗',
         'importance': 'lifestyle',
-        'badge': 'badge-green',
-        'badge_label': '🟢 Faktor Gaya Hidup',
         'detail': """
 Pola makan mencerminkan **kualitas nutrisi** sehari-hari mahasiswa, yang secara langsung 
 memengaruhi fungsi otak dan suasana hati (mood).
 
 **Kategori:**  
-- **Healthy** → Makan teratur, banyak sayur/buah, protein cukup, minim junk food  
-- **Moderate** → Kadang sehat kadang tidak, masih ada beberapa makanan bergizi  
-- **Unhealthy** → Sering skip makan, dominan junk food/instan, minim nutrisi  
+- **Sehat** → Makan teratur, banyak sayur/buah, protein cukup, minim junk food  
+- **Sedang** → Kadang sehat kadang tidak, masih ada beberapa makanan bergizi  
+- **Tidak Sehat** → Sering skip makan, dominan junk food/instan, minim nutrisi  
 
 **Hubungan dengan mental health:**  
 Kekurangan zat gizi seperti **omega-3, vitamin B12, zat besi, dan magnesium** terbukti 
-berhubungan dengan peningkatan risiko depresi. Pola makan buruk sering kali menjadi 
-lingkaran setan dengan depresi: depresi → malas makan → nutrisi buruk → memperparah depresi.
+berhubungan dengan peningkatan risiko depresi.
 """,
     },
     'Study Satisfaction': {
+        'name_id': 'Kepuasan Belajar',
         'type': 'slider',
         'min': 0, 'max': 5, 'default': 3,
         'desc': 'Tingkat kepuasan terhadap proses pembelajaran (0 = tidak puas, 5 = sangat puas)',
         'icon': '😊',
         'importance': 'moderate',
-        'badge': 'badge-blue',
-        'badge_label': '🔵 Pengaruh Moderat',
         'detail': """
 Kepuasan belajar mengukur **seberapa bermakna dan memuaskan** proses perkuliahan yang dijalani 
 mahasiswa, termasuk kepuasan terhadap materi, metode pengajaran, dan pencapaian akademik.
@@ -374,13 +354,12 @@ tidak berdaya dan kehilangan tujuan, yang merupakan gejala utama depresi.
 """,
     },
     'Family History of Mental Illness': {
+        'name_id': 'Riwayat Mental Keluarga',
         'type': 'categorical',
-        'options': ['No', 'Yes'],
+        'options': ['Tidak', 'Ya'],
         'desc': 'Riwayat penyakit mental dalam keluarga',
         'icon': '👨‍👩‍👧',
         'importance': 'moderate',
-        'badge': 'badge-blue',
-        'badge_label': '🔵 Faktor Risiko Genetik',
         'detail': """
 Riwayat penyakit mental dalam keluarga mencerminkan **faktor genetik dan lingkungan keluarga** 
 yang dapat meningkatkan kerentanan seseorang terhadap gangguan mental.
@@ -393,20 +372,15 @@ didiagnosis kondisi seperti depresi, kecemasan, gangguan bipolar, skizofrenia, d
 - Depresi memiliki **heritabilitas sekitar 37–50%** (berdasarkan studi kembar)  
 - Anak dari orang tua dengan depresi memiliki risiko **2–3× lebih tinggi**  
 - Faktor genetik berinteraksi dengan lingkungan (stress-diathesis model)
-
-**Cara pengisian:**  
-- **No** → Tidak ada riwayat penyakit mental di keluarga  
-- **Yes** → Ada anggota keluarga dengan riwayat gangguan mental
 """,
     },
     'CGPA': {
+        'name_id': 'CGPA',
         'type': 'number_float',
         'min': 0.0, 'max': 10.0, 'default': 7.5,
         'desc': 'Indeks prestasi kumulatif (skala 0–10)',
         'icon': '🎓',
         'importance': 'moderate',
-        'badge': 'badge-purple',
-        'badge_label': '🟣 Indikator Akademik',
         'detail': """
 CGPA (Cumulative Grade Point Average) adalah **rata-rata nilai akademik kumulatif** mahasiswa 
 selama masa studi, pada skala 0–10.
@@ -418,47 +392,39 @@ selama masa studi, pada skala 0–10.
 - **< 5.5** → Kurang / mengalami kesulitan akademik  
 
 **Hubungan dengan depresi:**  
-CGPA yang sangat rendah bisa menjadi konsekuensi **sekaligus penyebab** depresi:  
-- Depresi menyebabkan kesulitan konsentrasi → nilai turun  
-- Nilai rendah meningkatkan kecemasan dan stres → memperparah depresi  
-
-Namun CGPA yang **sangat tinggi** juga bisa mengindikasikan perfeksionisme berlebihan 
-yang berisiko terhadap kecemasan dan burnout.
+CGPA yang sangat rendah bisa menjadi konsekuensi **sekaligus penyebab** depresi.
 """,
     },
     'Sleep Duration': {
+        'name_id': 'Durasi Tidur',
         'type': 'categorical',
-        'options': ['Less than 5 hours', '5-6 hours', '7-8 hours', 'More than 8 hours'],
+        'options': ['Kurang dari 5 jam', '5-6 jam', '7-8 jam', 'Lebih dari 8 jam'],
         'desc': 'Durasi tidur per malam',
         'icon': '😴',
         'importance': 'lifestyle',
-        'badge': 'badge-green',
-        'badge_label': '🟢 Faktor Gaya Hidup',
         'detail': """
 Durasi tidur mengukur **berapa jam rata-rata tidur per malam**, yang sangat erat kaitannya 
 dengan kesehatan mental dan fungsi kognitif.
 
 **Kategori:**  
-- **Less than 5 hours** → Kurang tidur berat; sangat berisiko  
-- **5–6 hours** → Kurang tidur sedang; di bawah rekomendasi  
-- **7–8 hours** → Ideal; sesuai rekomendasi WHO untuk dewasa muda  
-- **More than 8 hours** → Tidur berlebihan; bisa menjadi gejala depresi  
+- **Kurang dari 5 jam** → Kurang tidur berat; sangat berisiko  
+- **5-6 jam** → Kurang tidur sedang; di bawah rekomendasi  
+- **7-8 jam** → Ideal; sesuai rekomendasi WHO untuk dewasa muda  
+- **Lebih dari 8 jam** → Tidur berlebihan; bisa menjadi gejala depresi  
 
 **Fakta ilmiah:**  
-- Kurang tidur kronis meningkatkan kadar kortisol (hormon stres) dan mengganggu regulasi emosi  
+- Kurang tidur kronis meningkatkan kadar kortisol (hormon stres)  
 - Insomnia adalah **gejala sekaligus penyebab** depresi  
-- Tidur berlebihan (hypersomnia) juga merupakan gejala depresi yang sering diabaikan  
 - **7–8 jam** per malam adalah target optimal untuk kesehatan mental mahasiswa
 """,
     },
     'Gender': {
+        'name_id': 'Gender',
         'type': 'categorical',
-        'options': ['Male', 'Female'],
+        'options': ['Laki-laki', 'Perempuan'],
         'desc': 'Jenis kelamin',
         'icon': '👤',
         'importance': 'demographic',
-        'badge': 'badge-purple',
-        'badge_label': '🟣 Faktor Demografis',
         'detail': """
 Jenis kelamin berperan dalam pola ekspresi dan prevalensi depresi, berkaitan dengan 
 perbedaan **biologis, hormonal, dan sosial-budaya**.
@@ -469,58 +435,18 @@ perbedaan **biologis, hormonal, dan sosial-budaya**.
 - Perbedaan hormonal (estrogen, progesteron) memengaruhi mood dan kerentanan depresi  
 
 **Catatan model:**  
-Gender memiliki pengaruh moderat (importance: 0.038). Artinya model tidak mendiskriminasi 
-secara berlebihan berdasarkan gender, melainkan menggunakannya sebagai salah satu dari banyak faktor.
+Gender memiliki pengaruh moderat. Model tidak mendiskriminasi secara berlebihan berdasarkan gender, 
+melainkan menggunakannya sebagai salah satu dari banyak faktor.
 """,
-    },
-    'City': {
-        'type': 'categorical',
-        'options': [
-            'Ahmedabad', 'Agra', 'Bangalore', 'Bhopal', 'Chennai',
-            'Delhi', 'Faridabad', 'Ghaziabad', 'Hyderabad', 'Indore',
-            'Jaipur', 'Kalyan', 'Kanpur', 'Kolkata', 'Lucknow',
-            'Ludhiana', 'Meerut', 'Mumbai', 'Nagpur', 'Nashik',
-            'Patna', 'Pune', 'Rajkot', 'Srinagar', 'Surat',
-            'Thane', 'Vadodara', 'Varanasi', 'Vasai-Virar', 'Visakhapatnam'
-        ],
-        'desc': 'Kota tempat tinggal mahasiswa',
-        'icon': '🏙️',
-        'importance': 'low',
-        'badge': 'badge-blue',
-        'badge_label': '🔵 Faktor Lingkungan',
-        'detail': """
-Kota tempat tinggal mencerminkan **konteks lingkungan** mahasiswa, termasuk akses layanan 
-kesehatan mental, tingkat kemacetan, polusi, biaya hidup, dan tekanan sosial kota besar vs kecil.
-
-**Dataset mencakup 30 kota besar di India:**  
-Mumbai, Delhi, Bangalore, Kolkata, Chennai, Hyderabad, Pune, dan kota-kota besar lainnya.
-
-**Pengaruh kota terhadap kesehatan mental:**  
-- Kota **metropolitan besar** (Mumbai, Delhi) → biaya hidup tinggi, kompetisi ketat, stres lebih tinggi  
-- Namun akses layanan kesehatan mental juga lebih baik  
-- **Tingkat kebisingan dan polusi** di kota besar berhubungan dengan peningkatan kecemasan  
-
-**Importance score:** 0.021 (terendah dari 12 fitur)  
-Kota memiliki pengaruh paling kecil dalam model, menunjukkan bahwa faktor internal (pikiran, 
-tekanan akademik, finansial) jauh lebih dominan daripada lokasi geografis.
-""",
-    },
+    }
 }
 
 ORDINAL_ENCODE = {
-    'Have you ever had suicidal thoughts ?': {'No': 0, 'Yes': 1},
-    'Dietary Habits': {'Healthy': 0, 'Moderate': 1, 'Unhealthy': 2},
-    'Family History of Mental Illness': {'No': 0, 'Yes': 1},
-    'Sleep Duration': {'Less than 5 hours': 0, '5-6 hours': 1, '7-8 hours': 2, 'More than 8 hours': 3},
-    'Gender': {'Male': 0, 'Female': 1},
-    'City': {c: i for i, c in enumerate(sorted([
-        'Ahmedabad', 'Agra', 'Bangalore', 'Bhopal', 'Chennai',
-        'Delhi', 'Faridabad', 'Ghaziabad', 'Hyderabad', 'Indore',
-        'Jaipur', 'Kalyan', 'Kanpur', 'Kolkata', 'Lucknow',
-        'Ludhiana', 'Meerut', 'Mumbai', 'Nagpur', 'Nashik',
-        'Patna', 'Pune', 'Rajkot', 'Srinagar', 'Surat',
-        'Thane', 'Vadodara', 'Varanasi', 'Vasai-Virar', 'Visakhapatnam'
-    ]))}
+    'Have you ever had suicidal thoughts ?': {'Tidak': 0, 'Ya': 1},
+    'Dietary Habits': {'Sehat': 0, 'Sedang': 1, 'Tidak Sehat': 2},
+    'Family History of Mental Illness': {'Tidak': 0, 'Ya': 1},
+    'Sleep Duration': {'Kurang dari 5 jam': 0, '5-6 jam': 1, '7-8 jam': 2, 'Lebih dari 8 jam': 3},
+    'Gender': {'Laki-laki': 0, 'Perempuan': 1}
 }
 
 SELECTED_FEATURES = [
@@ -534,12 +460,11 @@ SELECTED_FEATURES = [
     'Family History of Mental Illness',
     'CGPA',
     'Sleep Duration',
-    'Gender',
-    'City',
+    'Gender'
 ]
 
 # ─────────────────────────────────────────────
-# NAVIGATION (TAB-BASED, NO SIDEBAR)
+# HEADER
 # ─────────────────────────────────────────────
 st.markdown('<p class="hero-title">🧠 MindCheck <span class="accent">Student</span></p>', unsafe_allow_html=True)
 st.markdown('<p class="hero-subtitle">Sistem Prediksi Depresi Mahasiswa berbasis Machine Learning</p>', unsafe_allow_html=True)
@@ -563,40 +488,50 @@ with tab_prediksi:
 
         input_values = {}
 
-        # Row 1
-        c1, c2 = st.columns(2)
+        # ── Row 1: Gender | Age | CGPA (3 kolom sejajar) ──
+        c1, c2, c3 = st.columns(3)
         with c1:
             input_values['Gender'] = st.selectbox("👤 Gender", FEATURE_INFO['Gender']['options'])
-            input_values['Age'] = st.number_input("🎂 Usia", min_value=18, max_value=40, value=22)
         with c2:
-            input_values['City'] = st.selectbox("🏙️ Kota", FEATURE_INFO['City']['options'])
+            input_values['Age'] = st.number_input("🎂 Usia", min_value=18, max_value=40, value=22)
+        with c3:
             input_values['CGPA'] = st.number_input("🎓 CGPA (0–10)", min_value=0.0, max_value=10.0, value=7.5, step=0.1)
 
         st.markdown("")
 
-        # Row 2
-        c3, c4 = st.columns(2)
-        with c3:
-            input_values['Sleep Duration'] = st.selectbox("😴 Durasi Tidur", FEATURE_INFO['Sleep Duration']['options'])
-            input_values['Dietary Habits'] = st.selectbox("🥗 Pola Makan", FEATURE_INFO['Dietary Habits']['options'])
+        # ── Row 2: Durasi Tidur & Pikiran Bunuh Diri ──
+        c4, c5 = st.columns(2)
         with c4:
+            input_values['Sleep Duration'] = st.selectbox("😴 Durasi Tidur", FEATURE_INFO['Sleep Duration']['options'])
+        with c5:
             input_values['Have you ever had suicidal thoughts ?'] = st.selectbox(
                 "💭 Pikiran Bunuh Diri?", FEATURE_INFO['Have you ever had suicidal thoughts ?']['options'])
+
+        # ── Row 3: Pola Makan & Riwayat Mental Keluarga ──
+        c6, c7 = st.columns(2)
+        with c6:
+            input_values['Dietary Habits'] = st.selectbox("🥗 Pola Makan", FEATURE_INFO['Dietary Habits']['options'])
+        with c7:
             input_values['Family History of Mental Illness'] = st.selectbox(
                 "👨‍👩‍👧 Riwayat Mental Keluarga", FEATURE_INFO['Family History of Mental Illness']['options'])
 
         st.markdown("")
 
-        # Sliders
+        # ── Row 4: Sliders 2 kolom ──
         st.markdown('<p class="section-label">Skala Tekanan & Kepuasan</p>', unsafe_allow_html=True)
-        input_values['Academic Pressure'] = st.slider("📚 Tekanan Akademik", 0, 5, 3)
-        input_values['Financial Stress'] = st.slider("💰 Stres Finansial", 1, 5, 3)
-        input_values['Study Satisfaction'] = st.slider("😊 Kepuasan Belajar", 0, 5, 3)
-        input_values['Work/Study Hours'] = st.slider("⏱️ Jam Belajar", 0, 24, 8)
+
+        cs1, cs2 = st.columns(2)
+        with cs1:
+            input_values['Academic Pressure'] = st.slider("📚 Tekanan Akademik", 0, 5, 3)
+            input_values['Study Satisfaction'] = st.slider("😊 Kepuasan Belajar", 0, 5, 3)
+        with cs2:
+            input_values['Financial Stress'] = st.slider("💰 Stres Finansial", 1, 5, 3)
+            input_values['Work/Study Hours'] = st.slider("⏱️ Jam Belajar", 0, 24, 8)
 
         st.markdown("")
         predict_btn = st.button("🔍 Prediksi Sekarang", use_container_width=True)
 
+    # ── Kolom Hasil ──
     with col_result:
         st.markdown('<p class="section-label">📈 Hasil Prediksi</p>', unsafe_allow_html=True)
 
@@ -696,32 +631,22 @@ with tab_prediksi:
 
 
 # ─────────────────────────────────────────────
-# TAB: PENJELASAN FITUR (DETAIL)
+# TAB: PENJELASAN FITUR
 # ─────────────────────────────────────────────
 with tab_fitur:
     st.markdown("---")
     st.markdown('<p class="hero-title" style="font-size:1.8rem;">ℹ️ Penjelasan <span class="accent">Fitur</span></p>', unsafe_allow_html=True)
     st.markdown('<p class="hero-subtitle">Deskripsi lengkap, konteks ilmiah, dan panduan pengisian setiap fitur yang digunakan model</p>', unsafe_allow_html=True)
 
-
     st.markdown('<p class="section-label">📋 Detail Setiap Fitur (klik untuk memperluas)</p>', unsafe_allow_html=True)
 
     for feat in SELECTED_FEATURES:
         info = FEATURE_INFO[feat]
 
-        with st.expander(f"{info['icon']}  **{feat}**"):
-            # Badge
-            st.markdown(
-                f'<span class="badge {info["badge"]}">{info["badge_label"]}</span>',
-                unsafe_allow_html=True
-            )
-            st.markdown("")
-
-            # Description
+        with st.expander(f"{info['icon']}  **{info['name_id']}**"):
             st.markdown(f"**📌 Deskripsi Singkat:**  \n{info['desc']}")
             st.markdown("")
 
-            # Type info
             if info['type'] == 'categorical':
                 st.markdown("**🏷️ Tipe Data:** Kategorikal")
                 opts_html = " ".join([f'<span class="feature-tag">{o}</span>' for o in info['options']])
@@ -732,7 +657,6 @@ with tab_fitur:
                 st.markdown(f"**🏷️ Tipe Data:** Numerik (Rentang {info['min']}–{info['max']})")
 
             st.markdown("")
-            # Detailed explanation
             st.markdown("**📖 Penjelasan Lengkap:**")
             st.markdown(info['detail'])
 
@@ -759,7 +683,7 @@ with tab_fitur:
     Artinya cukup bisa diandalkan sebagai alat bantu awal — tapi tetap bukan pengganti dokter atau psikolog.<br><br>
 
     <div style="font-size:0.88rem; font-family:'Space Mono',monospace; color:#7c6aff; margin-bottom:0.4rem;">📝 Apa yang Dianalisis?</div>
-    AI ini memperhatikan <b style="color:#e8e8f0;">12 hal</b> tentang kamu: mulai dari seberapa tertekan di kampus,
+    AI ini memperhatikan <b style="color:#e8e8f0;">11 hal</b> tentang kamu: mulai dari seberapa tertekan di kampus,
     pola tidur, pola makan, nilai akademik (CGPA), hingga riwayat kesehatan mental keluarga.
     Semua informasi itu digabungkan untuk menghasilkan perkiraan.<br><br>
 
